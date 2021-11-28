@@ -12,11 +12,11 @@ download apk app : https://www.mediafire.com/file/e2pteuagpozgdtm/Easy_food.apk/
 
 
 # Libraries and technologies used
-- Navigation component
-- Retrofit
-- Room
-- MVVM & LiveData
-- Glide
+- Navigation component : one activity contains multiple fragments instead of creating multiple activites.
+- Retrofit : making HTTP connection with the rest API and convert meal json file to Kotlin/Java object.
+- Room : Save meals in local database.
+- MVVM & LiveData : Saperate logic code from views and save the state in case the screen configuration changes.
+- Glide : Catch images and load them in imageView.
 
 
 
