@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bottom_sheet_dialog_shape">
+
+
+    <ImageView
+        android:id="@+id/img_category"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/mealtest"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="10dp"/>
+
+
+        <TextView
+            android:id="@+id/tv_category_bttmsheet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Beef : 16"
+            android:textSize="18sp"
+            android:textColor="@color/accent"
+            android:layout_gravity="center"
+            app:layout_constraintTop_toTopOf="@id/img_category"
+            app:layout_constraintStart_toEndOf="@id/img_category"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+
+
+    <TextView
+        android:id="@+id/tv_category_btmsheet_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_category_bttmsheet"
+        app:layout_constraintStart_toEndOf="@id/img_category"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:text="testtest"
+        android:textSize="18sp"
+        android:textColor="@color/g_black"/>
+
+    <TextView
+        android:id="@+id/tv_read_more_btnsheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_category_btmsheet_name"
+        app:layout_constraintStart_toEndOf="@id/img_category"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/g_black"
+        android:text="Read more ..."
+        android:textSize="18sp"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

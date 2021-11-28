@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/drawable/bottom_sheet_dialog_shape.xml" value="0.2" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/drawable/category_bottom_fragment.xml" value="0.2703125" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/drawable/content_style.xml" value="0.1109375" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/drawable/ic_area.xml" value="0.2703125" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/drawable/ic_category.xml" value="0.2703125" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/drawable/ic_fav.xml" value="0.2703125" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/drawable/ic_filled_fav.xml" value="0.2703125" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/drawable/ic_home.xml" value="0.2703125" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/drawable/ic_saved.xml" value="0.2703125" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/drawable/ic_search.xml" value="0.2703125" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/drawable/search_box_background.xml" value="0.2703125" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/font/fonts.xml" value="0.14814814814814814" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/layout/activity_categories.xml" value="0.264" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/layout/activity_meal_detailes.xml" value="0.264" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/layout/activity_meal_detailes_fragment.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/layout/bottom_sheet_dialog.xml" value="0.536" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/layout/category_bottom_fragment.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/layout/category_card.xml" value="0.264" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/layout/fav_meal_card.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/layout/fragment_category.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/layout/fragment_favorite_meals.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/layout/fragment_search.xml" value="0.264" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/layout/meal_card.xml" value="0.2" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/layout/most_popular_card.xml" value="0.4" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/layout/single_meal_card.xml" value="0.4" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/menu/bottom_nevigation.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.13541666666666666" />
+        <entry key="..\:/Users/mo/AndroidStudioProjects/Easyfood/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.13541666666666666" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
