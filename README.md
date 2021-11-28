@@ -3,6 +3,7 @@ EasyFood is an app that makes making food easier and gives you full information 
 
 # Preview
 to download apk app : https://www.mediafire.com/file/e2pteuagpozgdtm/Easy_food.apk/file
+
 ![1](https://user-images.githubusercontent.com/78867217/143778911-20c19914-7f67-41c9-ab0f-0a609f9f07e7.jpg)
 ![2](https://user-images.githubusercontent.com/78867217/143778942-5ec4c4fc-2e02-4acc-86f8-7bd69c4837b1.jpg)
 ![3](https://user-images.githubusercontent.com/78867217/143778946-0ed6e7bd-8d00-46d0-9aac-9b2926d44194.jpg)
