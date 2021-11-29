@@ -22,7 +22,9 @@ download apk app : https://www.mediafire.com/file/e2pteuagpozgdtm/Easy_food.apk/
 - Retrofit : making HTTP connection with the rest API and convert meal json file to Kotlin/Java object.
 - Room : Save meals in local database.
 - MVVM & LiveData : Saperate logic code from views and save the state in case the screen configuration changes.
+- Coroutines : do some code in the background.
 - Glide : Catch images and load them in imageView.
+
 
 
 
