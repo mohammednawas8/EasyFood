@@ -1,6 +1,8 @@
 package com.example.easyfood.mvvm
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,20 +17,23 @@ class SearchMVVM : ViewModel() {
     private var searchedMealLiveData = MutableLiveData<MealDetail>()
 
 
-    fun searchMealDetail(name:String){
-        RetrofitInstance.foodApi.getMealByName(name).enqueue(object : Callback<RandomMeal>{
+    fun searchMealDetail(name: String,context: Context?) {
+        RetrofitInstance.foodApi.getMealByName(name).enqueue(object : Callback<RandomMeal> {
             override fun onResponse(call: Call<RandomMeal>, response: Response<RandomMeal>) {
-                searchedMealLiveData.value = response.body()!!.meals[0]
+                if (response.body()?.meals == null)
+                    Toast.makeText(context?.applicationContext, "No such a meal", Toast.LENGTH_SHORT).show()
+                else
+                    searchedMealLiveData.value = response.body()!!.meals[0]
             }
 
             override fun onFailure(call: Call<RandomMeal>, t: Throwable) {
-                Log.e(TAG,t.message.toString())
+                Log.e(TAG, t.message.toString())
             }
 
         })
     }
 
-    fun observeSearchLiveData():LiveData<MealDetail>{
+    fun observeSearchLiveData(): LiveData<MealDetail> {
         return searchedMealLiveData
     }
 }

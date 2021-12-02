@@ -39,7 +39,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginEnd="20dp"
                     android:orientation="horizontal"
                     app:layout_constraintStart_toStartOf="parent"
@@ -57,10 +57,10 @@
 
                     <ImageView
                         android:id="@+id/img_search"
-                        android:layout_width="30dp"
+                        android:layout_width="32dp"
                         android:layout_height="match_parent"
-                        android:layout_gravity="bottom"
-                        android:layout_marginStart="250dp"
+                        android:layout_gravity="bottom|center"
+                        android:layout_marginStart="230dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_baseline_search_24" />
                 </LinearLayout>
