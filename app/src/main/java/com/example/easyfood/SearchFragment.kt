@@ -80,12 +80,12 @@ class SearchFragment : Fragment() {
                     } else {
                         binding.apply {
 
-                            mealId = t!!.idMeal
+                            mealId = t.idMeal
                             mealStr = t.strMeal
                             mealThub = t.strMealThumb
 
                             Glide.with(context!!.applicationContext)
-                                .load(t!!.strMealThumb)
+                                .load(t.strMealThumb)
                                 .into(imgSearchedMeal)
 
                             tvSearchedMeal.text = t.strMeal
