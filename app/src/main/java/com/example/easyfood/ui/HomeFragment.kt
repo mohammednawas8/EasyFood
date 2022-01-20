@@ -74,9 +74,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mainFragMVVM = ViewModelProviders.of(this)[MainFragMVVM::class.java]
         showLoadingCase()
-        mainFragMVVM.getAllCategories(requireContext())
-        mainFragMVVM.getRandomMeal()
-        mainFragMVVM.getMealsByCategory("beef")
+
 
         prepareCategoryRecyclerView()
         preparePopularMeals()
@@ -147,10 +145,10 @@ class HomeFragment : Fragment() {
                     val bottomSheetFragment = MealBottomDialog()
                     val b = Bundle()
                     b.putString(CATEGORY_NAME, t!![0].strCategory)
-                    b.putString(MEAL_AREA, t!![0].strArea)
-                    b.putString(MEAL_NAME, t!![0].strMeal)
-                    b.putString(MEAL_THUMB, t!![0].strMealThumb)
-                    b.putString(MEAL_ID, t!![0].idMeal)
+                    b.putString(MEAL_AREA, t[0].strArea)
+                    b.putString(MEAL_NAME, t[0].strMeal)
+                    b.putString(MEAL_THUMB, t[0].strMealThumb)
+                    b.putString(MEAL_ID, t[0].idMeal)
 
                     bottomSheetFragment.arguments = b
 

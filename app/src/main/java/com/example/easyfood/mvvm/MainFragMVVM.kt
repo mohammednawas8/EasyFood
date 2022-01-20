@@ -22,7 +22,15 @@ class MainFragMVVM: ViewModel() {
     private val mutableRandomMeal = MutableLiveData<RandomMeal>()
     private val mutableMealsByCategory = MutableLiveData<Meals>()
 
-    fun getAllCategories(context:Context) {
+
+    init {
+        getRandomMeal()
+        getAllCategories()
+        getMealsByCategory("beef")
+    }
+
+
+    private fun getAllCategories() {
         RetrofitInstance.foodApi.getCategories().enqueue(object : Callback<Category> {
             override fun onResponse(call: Call<Category>, response: Response<Category>) {
                 mutableCategory.value = response.body()
@@ -30,12 +38,11 @@ class MainFragMVVM: ViewModel() {
 
             override fun onFailure(call: Call<Category>, t: Throwable) {
                 Log.d(TAG, t.message.toString())
-                Toast.makeText(context, t.message.toString(), Toast.LENGTH_SHORT).show()
             }
         })
     }
 
-    fun getRandomMeal() {
+    private fun getRandomMeal() {
         RetrofitInstance.foodApi.getRandomMeal().enqueue(object : Callback<RandomMeal> {
             override fun onResponse(call: Call<RandomMeal>, response: Response<RandomMeal>) {
                 mutableRandomMeal.value = response.body()
@@ -48,7 +55,7 @@ class MainFragMVVM: ViewModel() {
         })
     }
 
-    fun getMealsByCategory(category:String) {
+    private fun getMealsByCategory(category:String) {
 
         RetrofitInstance.foodApi.getMealsByCategory(category).enqueue(object : Callback<Meals> {
             override fun onResponse(call: Call<Meals>, response: Response<Meals>) {
