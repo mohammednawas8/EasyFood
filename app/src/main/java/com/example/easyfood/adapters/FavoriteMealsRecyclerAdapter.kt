@@ -23,6 +23,10 @@ class FavoriteMealsRecyclerAdapter :
         notifyDataSetChanged()
     }
 
+    fun getMelaByPosition(position: Int):MealDB{
+        return favoriteMeals[position]
+    }
+
 
     fun setOnFavoriteMealClickListener(onFavoriteClickListener: OnFavoriteClickListener) {
         this.onFavoriteClickListener = onFavoriteClickListener

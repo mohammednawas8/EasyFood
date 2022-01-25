@@ -1,4 +1,4 @@
-package com.example.easyfood.ui
+package com.example.easyfood.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,18 +11,18 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.easyfood.R
 import com.example.easyfood.adapters.CategoriesRecyclerAdapter
-import com.example.easyfood.data.pojo.CategoryX
+import com.example.easyfood.data.pojo.Category
 import com.example.easyfood.databinding.FragmentCategoryBinding
-import com.example.easyfood.databinding.SingleMealCardBinding
 import com.example.easyfood.mvvm.CategoryMVVM
+import com.example.easyfood.ui.activites.MealActivity
+import com.example.easyfood.util.Constants.Companion.CATEGORY_NAME
 
 
 class CategoryFragment : Fragment(R.layout.fragment_category) {
     private lateinit var binding:FragmentCategoryBinding
     private lateinit var myAdapter:CategoriesRecyclerAdapter
     private lateinit var categoryMvvm:CategoryMVVM
-    private var param1: String? = null
-    private var param2: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,17 +48,17 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
 
     private fun onCategoryClick() {
        myAdapter.onItemClicked(object : CategoriesRecyclerAdapter.OnItemCategoryClicked{
-           override fun onClickListener(category: CategoryX) {
-               val intent = Intent(context,MealActivity::class.java)
-               intent.putExtra(HomeFragment.CATEGORY_NAME,category.strCategory)
+           override fun onClickListener(category: Category) {
+               val intent = Intent(context, MealActivity::class.java)
+               intent.putExtra(CATEGORY_NAME,category.strCategory)
                startActivity(intent)
            }
        })
     }
 
     private fun observeCategories() {
-        categoryMvvm.observeCategories().observe(viewLifecycleOwner,object : Observer<List<CategoryX>>{
-            override fun onChanged(t: List<CategoryX>?) {
+        categoryMvvm.observeCategories().observe(viewLifecycleOwner,object : Observer<List<Category>>{
+            override fun onChanged(t: List<Category>?) {
                 myAdapter.setCategoryList(t!!)
             }
 

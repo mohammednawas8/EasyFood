@@ -2,13 +2,12 @@ package com.example.easyfood.mvvm
 
 import android.app.Application
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.*
 import com.example.easyfood.data.db.MealsDatabase
 import com.example.easyfood.data.db.Repository
 import com.example.easyfood.data.pojo.MealDB
 import com.example.easyfood.data.pojo.MealDetail
-import com.example.easyfood.data.pojo.RandomMeal
+import com.example.easyfood.data.pojo.RandomMealResponse
 import com.example.easyfood.data.retrofit.RetrofitInstance
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -43,13 +42,17 @@ class DetailsMVVM(application: Application) : AndroidViewModel(application) {
         }
     }
 
+    fun deleteMeal(meal:MealDB) = viewModelScope.launch(Dispatchers.IO) {
+        repository.deleteMeal(meal)
+    }
+
     fun getMealById(id: String) {
-        RetrofitInstance.foodApi.getMealById(id).enqueue(object : Callback<RandomMeal> {
-            override fun onResponse(call: Call<RandomMeal>, response: Response<RandomMeal>) {
+        RetrofitInstance.foodApi.getMealById(id).enqueue(object : Callback<RandomMealResponse> {
+            override fun onResponse(call: Call<RandomMealResponse>, response: Response<RandomMealResponse>) {
                 mutableMealDetail.value = response.body()!!.meals
             }
 
-            override fun onFailure(call: Call<RandomMeal>, t: Throwable) {
+            override fun onFailure(call: Call<RandomMealResponse>, t: Throwable) {
                 Log.e(TAG, t.message.toString())
             }
 
@@ -74,12 +77,12 @@ class DetailsMVVM(application: Application) : AndroidViewModel(application) {
     }
 
     fun getMealByIdBottomSheet(id: String) {
-        RetrofitInstance.foodApi.getMealById(id).enqueue(object : Callback<RandomMeal> {
-            override fun onResponse(call: Call<RandomMeal>, response: Response<RandomMeal>) {
+        RetrofitInstance.foodApi.getMealById(id).enqueue(object : Callback<RandomMealResponse> {
+            override fun onResponse(call: Call<RandomMealResponse>, response: Response<RandomMealResponse>) {
                 mutableMealBottomSheet.value = response.body()!!.meals
             }
 
-            override fun onFailure(call: Call<RandomMeal>, t: Throwable) {
+            override fun onFailure(call: Call<RandomMealResponse>, t: Throwable) {
                 Log.e(TAG, t.message.toString())
             }
 

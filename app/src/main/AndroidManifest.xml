@@ -13,13 +13,13 @@
         android:theme="@style/Theme.EasyFood"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.MealActivity"
+            android:name=".ui.activites.MealActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.MealDetailesActivity"
+            android:name=".ui.activites.MealDetailesActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.MainActivity"
+            android:name=".ui.activites.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

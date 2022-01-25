@@ -1,26 +1,23 @@
-package com.example.easyfood.ui
+package com.example.easyfood.ui.activites
 
 import android.content.Intent
-import android.graphics.drawable.Icon
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.example.easyfood.R
-import com.example.easyfood.data.db.MealsDatabase
 import com.example.easyfood.data.pojo.MealDB
 import com.example.easyfood.data.pojo.MealDetail
 import com.example.easyfood.databinding.ActivityMealDetailesBinding
 import com.example.easyfood.mvvm.DetailsMVVM
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import com.example.easyfood.util.Constants.Companion.MEAL_ID
+import com.example.easyfood.util.Constants.Companion.MEAL_STR
+import com.example.easyfood.util.Constants.Companion.MEAL_THUMB
+import com.google.android.material.snackbar.Snackbar
 
 class MealDetailesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMealDetailesBinding
@@ -35,7 +32,7 @@ class MealDetailesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        detailsMVVM = ViewModelProviders.of(this).get(DetailsMVVM::class.java)
+        detailsMVVM = ViewModelProviders.of(this)[DetailsMVVM::class.java]
         binding = ActivityMealDetailesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -64,13 +61,23 @@ class MealDetailesActivity : AppCompatActivity() {
             if(isMealSavedInDatabase()){
                 deleteMeal()
                 binding.btnSave.setImageResource(R.drawable.ic_baseline_save_24)
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Meal was deleted",
+                Snackbar.LENGTH_SHORT).show()
             }else{
                 saveMeal()
                 binding.btnSave.setImageResource(R.drawable.ic_saved)
+                Snackbar.make(
+                    findViewById(android.R.id.content),
+                    "Meal saved",
+                    Snackbar.LENGTH_SHORT).show()
             }
         }
 
     }
+
+
 
     private fun deleteMeal() {
         detailsMVVM.deleteMealById(mealId)
@@ -143,10 +150,9 @@ class MealDetailesActivity : AppCompatActivity() {
     private fun getMealInfoFromIntent() {
         val tempIntent = intent
 
-        Log.d("awad",tempIntent.getStringExtra(HomeFragment.MEAL_ID).toString())
-        this.mealId = tempIntent.getStringExtra(HomeFragment.MEAL_ID)!!
-        this.mealStr = tempIntent.getStringExtra(HomeFragment.MEAL_STR)!!
-        this.mealThumb = tempIntent.getStringExtra(HomeFragment.MEAL_THUMB)!!
+        this.mealId = tempIntent.getStringExtra(MEAL_ID)!!
+        this.mealStr = tempIntent.getStringExtra(MEAL_STR)!!
+        this.mealThumb = tempIntent.getStringExtra(MEAL_THUMB)!!
     }
 
 }

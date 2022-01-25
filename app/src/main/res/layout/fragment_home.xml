@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.MainActivity"
+    tools:context=".ui.activites.MainActivity"
     android:id="@+id/root_home">
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/loading_gif"

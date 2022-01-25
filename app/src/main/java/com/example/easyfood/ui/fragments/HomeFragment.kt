@@ -1,4 +1,4 @@
-package com.example.easyfood.ui
+package com.example.easyfood.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,12 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.easyfood.R
 import com.example.easyfood.adapters.CategoriesRecyclerAdapter
@@ -23,32 +24,28 @@ import com.example.easyfood.data.pojo.*
 import com.example.easyfood.databinding.FragmentHomeBinding
 import com.example.easyfood.mvvm.DetailsMVVM
 import com.example.easyfood.mvvm.MainFragMVVM
-
-
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import com.example.easyfood.ui.activites.MealActivity
+import com.example.easyfood.ui.MealBottomDialog
+import com.example.easyfood.ui.activites.MealDetailesActivity
+import com.example.easyfood.util.Constants.Companion.CATEGORY_NAME
+import com.example.easyfood.util.Constants.Companion.MEAL_AREA
+import com.example.easyfood.util.Constants.Companion.MEAL_ID
+import com.example.easyfood.util.Constants.Companion.MEAL_NAME
+import com.example.easyfood.util.Constants.Companion.MEAL_STR
+import com.example.easyfood.util.Constants.Companion.MEAL_THUMB
 
 
 class HomeFragment : Fragment() {
-    private lateinit var meal: RandomMeal
+    private lateinit var meal: RandomMealResponse
     private lateinit var detailMvvm: DetailsMVVM
     private var randomMealId = ""
 
-    companion object {
-        const val CATEGORY_NAME = "com.example.easyfood.ui.categoryName"
-        const val MEAL_ID = "com.example.easyfood.ui.mealId"
-        const val MEAL_STR = "com.example.easyfood.ui.mealStr"
-        const val MEAL_THUMB = "com.example.easyfood.ui.mealThumb"
-        const val MEAL_AREA = "com.example.easyfood.ui.mealArea"
-        const val MEAL_NAME = "com.example.easyfood.ui.mealName"
-    }
+
 
     private lateinit var myAdapter: CategoriesRecyclerAdapter
     private lateinit var mostPopularFoodAdapter: MostPopularRecyclerAdapter
     lateinit var binding: FragmentHomeBinding
 
-    private var param1: String? = null
-    private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,10 +53,6 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         myAdapter = CategoriesRecyclerAdapter()
         mostPopularFoodAdapter = MostPopularRecyclerAdapter()
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -81,8 +74,9 @@ class HomeFragment : Fragment() {
         onRndomMealClick()
         onRandomLongClick()
 
-        mainFragMVVM.observeMealByCategory().observe(viewLifecycleOwner, object : Observer<Meals> {
-            override fun onChanged(t: Meals?) {
+
+        mainFragMVVM.observeMealByCategory().observe(viewLifecycleOwner, object : Observer<MealsResponse> {
+            override fun onChanged(t: MealsResponse?) {
                 val meals = t!!.meals
                 setMealsByCategoryAdapter(meals)
                 cancelLoadingCase()
@@ -91,16 +85,16 @@ class HomeFragment : Fragment() {
 
         })
 
-        mainFragMVVM.observeCategories().observe(viewLifecycleOwner, object : Observer<Category> {
-            override fun onChanged(t: Category?) {
+        mainFragMVVM.observeCategories().observe(viewLifecycleOwner, object : Observer<CategoryResponse> {
+            override fun onChanged(t: CategoryResponse?) {
                 val categories = t!!.categories
                 setCategoryAdapter(categories)
 
             }
         })
 
-        mainFragMVVM.observeRandomMeal().observe(viewLifecycleOwner, object : Observer<RandomMeal> {
-            override fun onChanged(t: RandomMeal?) {
+        mainFragMVVM.observeRandomMeal().observe(viewLifecycleOwner, object : Observer<RandomMealResponse> {
+            override fun onChanged(t: RandomMealResponse?) {
                 val mealImage = view.findViewById<ImageView>(R.id.img_random_meal)
                 val imageUrl = t!!.meals[0].strMealThumb
                 randomMealId = t.meals[0].idMeal
@@ -124,7 +118,7 @@ class HomeFragment : Fragment() {
         })
 
         myAdapter.onItemClicked(object : CategoriesRecyclerAdapter.OnItemCategoryClicked {
-            override fun onClickListener(category: CategoryX) {
+            override fun onClickListener(category: Category) {
                 val intent = Intent(activity, MealActivity::class.java)
                 intent.putExtra(CATEGORY_NAME, category.strCategory)
                 startActivity(intent)
@@ -223,7 +217,7 @@ class HomeFragment : Fragment() {
         mostPopularFoodAdapter.setMealList(meals)
     }
 
-    private fun setCategoryAdapter(categories: List<CategoryX>) {
+    private fun setCategoryAdapter(categories: List<Category>) {
         myAdapter.setCategoryList(categories)
     }
 

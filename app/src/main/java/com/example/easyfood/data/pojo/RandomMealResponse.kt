@@ -1,5 +1,5 @@
 package com.example.easyfood.data.pojo
 
-data class RandomMeal(
+data class RandomMealResponse(
     val meals: List<MealDetail>
 )

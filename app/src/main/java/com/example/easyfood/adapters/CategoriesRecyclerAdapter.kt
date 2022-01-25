@@ -1,19 +1,18 @@
 package com.example.easyfood.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.easyfood.data.pojo.CategoryX
+import com.example.easyfood.data.pojo.Category
 import com.example.easyfood.databinding.CategoryCardBinding
 
 class CategoriesRecyclerAdapter : RecyclerView.Adapter<CategoriesRecyclerAdapter.CategoryViewHolder>() {
-    private var categoryList:List<CategoryX> = ArrayList()
+    private var categoryList:List<Category> = ArrayList()
     private lateinit var onItemClick: OnItemCategoryClicked
     private lateinit var onLongCategoryClick:OnLongCategoryClick
 
-    fun setCategoryList(categoryList: List<CategoryX>){
+    fun setCategoryList(categoryList: List<Category>){
         this.categoryList = categoryList
         notifyDataSetChanged()
     }
@@ -21,6 +20,8 @@ class CategoriesRecyclerAdapter : RecyclerView.Adapter<CategoriesRecyclerAdapter
     fun setOnLongCategoryClick(onLongCategoryClick:OnLongCategoryClick){
         this.onLongCategoryClick = onLongCategoryClick
     }
+
+
 
     fun onItemClicked(onItemClick: OnItemCategoryClicked){
         this.onItemClick = onItemClick
@@ -53,10 +54,10 @@ class CategoriesRecyclerAdapter : RecyclerView.Adapter<CategoriesRecyclerAdapter
     }
 
     interface OnItemCategoryClicked{
-        fun onClickListener(category:CategoryX)
+        fun onClickListener(category:Category)
     }
 
     interface OnLongCategoryClick{
-        fun onCategoryLongCLick(category:CategoryX)
+        fun onCategoryLongCLick(category:Category)
     }
 }

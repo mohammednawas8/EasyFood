@@ -1,12 +1,9 @@
 package com.example.easyfood.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.easyfood.R
-import com.example.easyfood.data.pojo.CategoryX
 import com.example.easyfood.data.pojo.Meal
 import com.example.easyfood.databinding.MealCardBinding
 

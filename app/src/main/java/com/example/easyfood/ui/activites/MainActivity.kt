@@ -1,4 +1,4 @@
-package com.example.easyfood.ui
+package com.example.easyfood.ui.activites
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

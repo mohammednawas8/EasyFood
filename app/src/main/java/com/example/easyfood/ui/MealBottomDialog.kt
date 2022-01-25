@@ -9,6 +9,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.easyfood.R
+import com.example.easyfood.ui.activites.MealDetailesActivity
+import com.example.easyfood.ui.fragments.HomeFragment
+import com.example.easyfood.util.Constants.Companion.CATEGORY_NAME
+import com.example.easyfood.util.Constants.Companion.MEAL_AREA
+import com.example.easyfood.util.Constants.Companion.MEAL_ID
+import com.example.easyfood.util.Constants.Companion.MEAL_NAME
+import com.example.easyfood.util.Constants.Companion.MEAL_STR
+import com.example.easyfood.util.Constants.Companion.MEAL_THUMB
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class MealBottomDialog() : BottomSheetDialogFragment() {
@@ -22,11 +30,11 @@ class MealBottomDialog() : BottomSheetDialogFragment() {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL,R.style.AppBottomSheetDialogTheme)
         val b = arguments
-        mealName = b!!.getString(HomeFragment.MEAL_NAME).toString()
-        mealId =b!!.getString(HomeFragment.MEAL_ID).toString()
-        mealImg =b!!.getString(HomeFragment.MEAL_THUMB).toString()
-        mealCategory =b!!.getString(HomeFragment.CATEGORY_NAME).toString()
-        mealCountry =b!!.getString(HomeFragment.MEAL_AREA).toString()
+        mealName = b!!.getString(MEAL_NAME).toString()
+        mealId =b!!.getString(MEAL_ID).toString()
+        mealImg =b!!.getString(MEAL_THUMB).toString()
+        mealCategory =b!!.getString(CATEGORY_NAME).toString()
+        mealCountry =b!!.getString(MEAL_AREA).toString()
     }
 
     override fun onCreateView(
@@ -44,10 +52,10 @@ class MealBottomDialog() : BottomSheetDialogFragment() {
         prepareView(view)
 
         view.setOnClickListener {
-            val intent = Intent(context,MealDetailesActivity::class.java)
-            intent.putExtra(HomeFragment.MEAL_ID,mealId)
-            intent.putExtra(HomeFragment.MEAL_STR,mealName)
-            intent.putExtra(HomeFragment.MEAL_THUMB,mealImg)
+            val intent = Intent(context, MealDetailesActivity::class.java)
+            intent.putExtra(MEAL_ID,mealId)
+            intent.putExtra(MEAL_STR,mealName)
+            intent.putExtra(MEAL_THUMB,mealImg)
             startActivity(intent)
         }
 

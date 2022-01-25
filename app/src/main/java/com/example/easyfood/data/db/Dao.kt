@@ -1,10 +1,8 @@
 package com.example.easyfood.data.db
 
 import androidx.lifecycle.LiveData
+import androidx.room.*
 import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
 import com.example.easyfood.data.pojo.MealDB
 import com.example.easyfood.data.pojo.MealDetail
 
@@ -13,7 +11,7 @@ interface Dao {
     @Insert
     fun insertFavorite(meal: MealDB)
 
-    @Delete
+    @Update
     fun updateFavorite(meal:MealDB)
 
     @Query("SELECT * FROM meal_information order by mealId asc")

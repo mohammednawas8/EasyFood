@@ -1,10 +1,8 @@
-package com.example.easyfood.ui
+package com.example.easyfood.ui.activites
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
@@ -16,10 +14,14 @@ import com.example.easyfood.adapters.MealRecyclerAdapter
 import com.example.easyfood.adapters.SetOnMealClickListener
 import com.example.easyfood.data.pojo.Meal
 import com.example.easyfood.databinding.ActivityCategoriesBinding
-import com.example.easyfood.mvvm.MealMVVM
+import com.example.easyfood.mvvm.MealActivityMVVM
+import com.example.easyfood.util.Constants.Companion.CATEGORY_NAME
+import com.example.easyfood.util.Constants.Companion.MEAL_ID
+import com.example.easyfood.util.Constants.Companion.MEAL_STR
+import com.example.easyfood.util.Constants.Companion.MEAL_THUMB
 
 class MealActivity : AppCompatActivity() {
-    private lateinit var mealMvvm: MealMVVM
+    private lateinit var mealActivityMvvm: MealActivityMVVM
     private lateinit var binding: ActivityCategoriesBinding
     private lateinit var myAdapter: MealRecyclerAdapter
     private var categoryNme = ""
@@ -27,11 +29,11 @@ class MealActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoriesBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        mealMvvm = ViewModelProviders.of(this)[MealMVVM::class.java]
+        mealActivityMvvm = ViewModelProviders.of(this)[MealActivityMVVM::class.java]
         startLoading()
         prepareRecyclerView()
-        mealMvvm.getMealsByCategory(getCategory())
-        mealMvvm.observeMeal().observe(this, object : Observer<List<Meal>> {
+        mealActivityMvvm.getMealsByCategory(getCategory())
+        mealActivityMvvm.observeMeal().observe(this, object : Observer<List<Meal>> {
             override fun onChanged(t: List<Meal>?) {
                 if(t==null){
                     hideLoading()
@@ -48,9 +50,9 @@ class MealActivity : AppCompatActivity() {
         myAdapter.setOnMealClickListener(object : SetOnMealClickListener {
             override fun setOnClickListener(meal: Meal) {
                 val intent = Intent(applicationContext, MealDetailesActivity::class.java)
-                intent.putExtra(HomeFragment.MEAL_ID, meal.idMeal)
-                intent.putExtra(HomeFragment.MEAL_STR, meal.strMeal)
-                intent.putExtra(HomeFragment.MEAL_THUMB, meal.strMealThumb)
+                intent.putExtra(MEAL_ID, meal.idMeal)
+                intent.putExtra(MEAL_STR, meal.strMeal)
+                intent.putExtra(MEAL_THUMB, meal.strMealThumb)
                 startActivity(intent)
             }
         })
@@ -71,7 +73,7 @@ class MealActivity : AppCompatActivity() {
 
     private fun getCategory(): String {
         val tempIntent = intent
-        val x = intent.getStringExtra(HomeFragment.CATEGORY_NAME)!!
+        val x = intent.getStringExtra(CATEGORY_NAME)!!
         categoryNme = x
         return x
     }
