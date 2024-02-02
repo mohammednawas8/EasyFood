@@ -15,9 +15,10 @@ import com.example.easyfood.data.pojo.MealDetail
 import com.example.easyfood.databinding.FragmentSearchBinding
 import com.example.easyfood.mvvm.SearchMVVM
 import com.example.easyfood.ui.activites.MealDetailesActivity
-import com.example.easyfood.util.Constants.Companion.MEAL_ID
-import com.example.easyfood.util.Constants.Companion.MEAL_STR
-import com.example.easyfood.util.Constants.Companion.MEAL_THUMB
+import com.example.easyfood.ui.fragments.HomeFragment
+import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_ID
+import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_STR
+import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_THUMB
 
 class SearchFragment : Fragment() {
     private lateinit var myAdapter: MealRecyclerAdapter
