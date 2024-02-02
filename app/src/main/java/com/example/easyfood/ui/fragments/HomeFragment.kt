@@ -27,18 +27,26 @@ import com.example.easyfood.mvvm.MainFragMVVM
 import com.example.easyfood.ui.activites.MealActivity
 import com.example.easyfood.ui.MealBottomDialog
 import com.example.easyfood.ui.activites.MealDetailesActivity
-import com.example.easyfood.util.Constants.Companion.CATEGORY_NAME
-import com.example.easyfood.util.Constants.Companion.MEAL_AREA
-import com.example.easyfood.util.Constants.Companion.MEAL_ID
-import com.example.easyfood.util.Constants.Companion.MEAL_NAME
-import com.example.easyfood.util.Constants.Companion.MEAL_STR
-import com.example.easyfood.util.Constants.Companion.MEAL_THUMB
 
 
-class HomeFragment : Fragment() {
+
+
+class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var meal: RandomMealResponse
     private lateinit var detailMvvm: DetailsMVVM
     private var randomMealId = ""
+
+
+    companion object{
+        const val MEAL_ID="com.example.easyfood.ui.fragments.idMeal"
+        const val MEAL_NAME="com.example.easyfood.ui.fragments.nameMeal"
+        const val MEAL_THUMB="com.example.easyfood.ui.fragments.thumbMeal"
+        const val CATEGORY_NAME=" com.example.easyfood.ui.fragments.categoryName"
+        const val MEAL_STR=" com.example.easyfood.ui.fragments.strMeal"
+        const val MEAL_AREA=" com.example.easyfood.ui.fragments.strArea"
+
+
+    }
 
 
 

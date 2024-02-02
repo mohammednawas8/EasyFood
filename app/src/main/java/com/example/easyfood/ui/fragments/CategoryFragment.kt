@@ -15,7 +15,8 @@ import com.example.easyfood.data.pojo.Category
 import com.example.easyfood.databinding.FragmentCategoryBinding
 import com.example.easyfood.mvvm.CategoryMVVM
 import com.example.easyfood.ui.activites.MealActivity
-import com.example.easyfood.util.Constants.Companion.CATEGORY_NAME
+import com.example.easyfood.ui.fragments.HomeFragment
+import com.example.easyfood.ui.fragments.HomeFragment.Companion.CATEGORY_NAME
 
 
 class CategoryFragment : Fragment(R.layout.fragment_category) {

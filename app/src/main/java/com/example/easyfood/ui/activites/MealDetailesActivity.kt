@@ -14,9 +14,10 @@ import com.example.easyfood.data.pojo.MealDB
 import com.example.easyfood.data.pojo.MealDetail
 import com.example.easyfood.databinding.ActivityMealDetailesBinding
 import com.example.easyfood.mvvm.DetailsMVVM
-import com.example.easyfood.util.Constants.Companion.MEAL_ID
-import com.example.easyfood.util.Constants.Companion.MEAL_STR
-import com.example.easyfood.util.Constants.Companion.MEAL_THUMB
+import com.example.easyfood.ui.fragments.HomeFragment
+import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_ID
+import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_STR
+import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_THUMB
 import com.google.android.material.snackbar.Snackbar
 
 class MealDetailesActivity : AppCompatActivity() {
