@@ -10,13 +10,14 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.easyfood.R
 import com.example.easyfood.ui.activites.MealDetailesActivity
+
 import com.example.easyfood.ui.fragments.HomeFragment
-import com.example.easyfood.util.Constants.Companion.CATEGORY_NAME
-import com.example.easyfood.util.Constants.Companion.MEAL_AREA
-import com.example.easyfood.util.Constants.Companion.MEAL_ID
-import com.example.easyfood.util.Constants.Companion.MEAL_NAME
-import com.example.easyfood.util.Constants.Companion.MEAL_STR
-import com.example.easyfood.util.Constants.Companion.MEAL_THUMB
+import com.example.easyfood.ui.fragments.HomeFragment.Companion.CATEGORY_NAME
+import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_AREA
+import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_ID
+import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_NAME
+import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_STR
+import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_THUMB
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class MealBottomDialog() : BottomSheetDialogFragment() {

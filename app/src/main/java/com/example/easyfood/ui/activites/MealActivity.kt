@@ -15,10 +15,11 @@ import com.example.easyfood.adapters.SetOnMealClickListener
 import com.example.easyfood.data.pojo.Meal
 import com.example.easyfood.databinding.ActivityCategoriesBinding
 import com.example.easyfood.mvvm.MealActivityMVVM
-import com.example.easyfood.util.Constants.Companion.CATEGORY_NAME
-import com.example.easyfood.util.Constants.Companion.MEAL_ID
-import com.example.easyfood.util.Constants.Companion.MEAL_STR
-import com.example.easyfood.util.Constants.Companion.MEAL_THUMB
+import com.example.easyfood.ui.fragments.HomeFragment
+import com.example.easyfood.ui.fragments.HomeFragment.Companion.CATEGORY_NAME
+import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_ID
+import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_STR
+import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_THUMB
 
 class MealActivity : AppCompatActivity() {
     private lateinit var mealActivityMvvm: MealActivityMVVM
