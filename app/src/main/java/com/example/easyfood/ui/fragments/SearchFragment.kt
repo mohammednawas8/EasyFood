@@ -73,28 +73,24 @@ class SearchFragment : Fragment() {
     }
 
     private fun observeSearchLiveData() {
-        searchMvvm.observeSearchLiveData()
-            .observe(viewLifecycleOwner, object : Observer<MealDetail> {
-                override fun onChanged(t: MealDetail?) {
-                    if (t == null) {
-                        Toast.makeText(context, "No such a meal", Toast.LENGTH_SHORT).show()
-                    } else {
-                        binding.apply {
+        searchMvvm.observeSearchLiveData().observe(viewLifecycleOwner) { mealDetail: MealDetail? ->
+            if (mealDetail == null) {
+                Toast.makeText(context, "No such a meal", Toast.LENGTH_SHORT).show()
+            } else {
+                binding.apply {
+                    mealId = mealDetail.idMeal
+                    mealStr = mealDetail.strMeal
+                    mealThub = mealDetail.strMealThumb
 
-                            mealId = t.idMeal
-                            mealStr = t.strMeal
-                            mealThub = t.strMealThumb
+                    Glide.with(requireContext().applicationContext)
+                        .load(mealDetail.strMealThumb)
+                        .into(imgSearchedMeal)
 
-                            Glide.with(context!!.applicationContext)
-                                .load(t.strMealThumb)
-                                .into(imgSearchedMeal)
-
-                            tvSearchedMeal.text = t.strMeal
-                            searchedMealCard.visibility = View.VISIBLE
-                        }
-                    }
+                    tvSearchedMeal.text = mealDetail.strMeal
+                    searchedMealCard.visibility = View.VISIBLE
                 }
-            })
+            }
+        }
     }
 
 

@@ -83,36 +83,36 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         onRandomLongClick()
 
 
-        mainFragMVVM.observeMealByCategory().observe(viewLifecycleOwner, object : Observer<MealsResponse> {
-            override fun onChanged(t: MealsResponse?) {
-                val meals = t!!.meals
+        mainFragMVVM.observeMealByCategory().observe(viewLifecycleOwner) { mealsResponse: MealsResponse? ->
+            val meals = mealsResponse?.meals
+            if (meals != null) {
                 setMealsByCategoryAdapter(meals)
-                cancelLoadingCase()
+            } else {
+                // Handle the case when mealsResponse or meals is null
+                // For example, show an error message or perform a fallback action
             }
+            cancelLoadingCase()
+        }
 
-
-        })
-
-        mainFragMVVM.observeCategories().observe(viewLifecycleOwner, object : Observer<CategoryResponse> {
-            override fun onChanged(t: CategoryResponse?) {
-                val categories = t!!.categories
+        mainFragMVVM.observeCategories().observe(viewLifecycleOwner) { categoryResponse: CategoryResponse? ->
+            val categories = categoryResponse?.categories
+            if (categories != null) {
                 setCategoryAdapter(categories)
-
             }
-        })
+        }
 
-        mainFragMVVM.observeRandomMeal().observe(viewLifecycleOwner, object : Observer<RandomMealResponse> {
-            override fun onChanged(t: RandomMealResponse?) {
+
+        mainFragMVVM.observeRandomMeal().observe(viewLifecycleOwner) { randomMealResponse: RandomMealResponse? ->
+            randomMealResponse?.meals?.firstOrNull()?.let { randomMeal ->
                 val mealImage = view.findViewById<ImageView>(R.id.img_random_meal)
-                val imageUrl = t!!.meals[0].strMealThumb
-                randomMealId = t.meals[0].idMeal
+                val imageUrl = randomMeal.strMealThumb
+                randomMealId = randomMeal.idMeal
                 Glide.with(this@HomeFragment)
                     .load(imageUrl)
                     .into(mealImage)
-                meal = t
+                meal = randomMealResponse
             }
-
-        })
+        }
 
         mostPopularFoodAdapter.setOnClickListener(object : OnItemClick {
             override fun onItemClick(meal: Meal) {
@@ -141,24 +141,20 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         })
 
-        detailMvvm.observeMealBottomSheet()
-            .observe(viewLifecycleOwner, object : Observer<List<MealDetail>> {
-                override fun onChanged(t: List<MealDetail>?) {
-                    val bottomSheetFragment = MealBottomDialog()
-                    val b = Bundle()
-                    b.putString(CATEGORY_NAME, t!![0].strCategory)
-                    b.putString(MEAL_AREA, t[0].strArea)
-                    b.putString(MEAL_NAME, t[0].strMeal)
-                    b.putString(MEAL_THUMB, t[0].strMealThumb)
-                    b.putString(MEAL_ID, t[0].idMeal)
-
-                    bottomSheetFragment.arguments = b
-
-                    bottomSheetFragment.show(childFragmentManager, "BottomSheetDialog")
+        detailMvvm.observeMealBottomSheet().observe(viewLifecycleOwner) { mealDetails: List<MealDetail>? ->
+            mealDetails?.getOrNull(0)?.let { firstMealDetail ->
+                val bottomSheetFragment = MealBottomDialog()
+                val b = Bundle().apply {
+                    putString(CATEGORY_NAME, firstMealDetail.strCategory)
+                    putString(MEAL_AREA, firstMealDetail.strArea)
+                    putString(MEAL_NAME, firstMealDetail.strMeal)
+                    putString(MEAL_THUMB, firstMealDetail.strMealThumb)
+                    putString(MEAL_ID, firstMealDetail.idMeal)
                 }
-
-            })
-
+                bottomSheetFragment.arguments = b
+                bottomSheetFragment.show(childFragmentManager, "BottomSheetDialog")
+            }
+        }
 
         // on search icon click
         binding.imgSearch.setOnClickListener {

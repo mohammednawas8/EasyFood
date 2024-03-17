@@ -58,12 +58,9 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
     }
 
     private fun observeCategories() {
-        categoryMvvm.observeCategories().observe(viewLifecycleOwner,object : Observer<List<Category>>{
-            override fun onChanged(t: List<Category>?) {
-                myAdapter.setCategoryList(t!!)
-            }
-
-        })
+        categoryMvvm.observeCategories().observe(viewLifecycleOwner) { categories ->
+            categories?.let { myAdapter.setCategoryList(it) }
+        }
     }
 
     private fun prepareRecyclerView() {

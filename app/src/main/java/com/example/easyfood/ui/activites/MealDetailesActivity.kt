@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.example.easyfood.R
@@ -33,7 +34,7 @@ class MealDetailesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        detailsMVVM = ViewModelProviders.of(this)[DetailsMVVM::class.java]
+        detailsMVVM = ViewModelProvider(this) [DetailsMVVM::class.java]
         binding = ActivityMealDetailesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -45,13 +46,12 @@ class MealDetailesActivity : AppCompatActivity() {
 
         detailsMVVM.getMealById(mealId)
 
-        detailsMVVM.observeMealDetail().observe(this, object : Observer<List<MealDetail>> {
-            override fun onChanged(t: List<MealDetail>?) {
-                setTextsInViews(t!![0])
+        detailsMVVM.observeMealDetail().observe(this) { mealDetails ->
+            mealDetails?.let {
+                setTextsInViews(it[0])
                 stopLoading()
             }
-
-        })
+        }
 
         binding.imgYoutube.setOnClickListener {
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(ytUrl)))

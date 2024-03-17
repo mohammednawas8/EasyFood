@@ -58,17 +58,17 @@ class FavoriteMeals : Fragment() {
         onFavoriteLongMealClick()
         observeBottomDialog()
 
-        detailsMVVM.observeSaveMeal().observe(viewLifecycleOwner,object : Observer<List<MealDB>>{
-            override fun onChanged(t: List<MealDB>?) {
-                myAdapter.setFavoriteMealsList(t!!)
-                if(t.isEmpty())
-                    fBinding.tvFavEmpty.visibility = View.VISIBLE
-
-                else
-                    fBinding.tvFavEmpty.visibility = View.GONE
-
+        detailsMVVM.observeSaveMeal().observe(viewLifecycleOwner) { t: List<MealDB>? ->
+            if (t.isNullOrEmpty()) {
+                myAdapter.setFavoriteMealsList(emptyList())
+                fBinding.tvFavEmpty.visibility = View.VISIBLE
+            } else {
+                myAdapter.setFavoriteMealsList(t)
+                fBinding.tvFavEmpty.visibility = View.GONE
             }
-        })
+        }
+
+
 
         val itemTouchHelper = object : ItemTouchHelper.SimpleCallback(
             ItemTouchHelper.UP or ItemTouchHelper.DOWN,
@@ -103,20 +103,20 @@ class FavoriteMeals : Fragment() {
     }
 
     private fun observeBottomDialog() {
-        detailsMVVM.observeMealBottomSheet().observe(viewLifecycleOwner,object : Observer<List<MealDetail>>{
-            override fun onChanged(t: List<MealDetail>?) {
+        detailsMVVM.observeMealBottomSheet().observe(viewLifecycleOwner) { mealDetails: List<MealDetail>? ->
+            mealDetails?.getOrNull(0)?.let { firstMealDetail ->
                 val bottomDialog = MealBottomDialog()
-                val b = Bundle()
-                b.putString(CATEGORY_NAME,t!![0].strCategory)
-                b.putString(MEAL_AREA,t[0].strArea)
-                b.putString(MEAL_NAME,t[0].strMeal)
-                b.putString(MEAL_THUMB,t[0].strMealThumb)
-                b.putString(MEAL_ID,t[0].idMeal)
+                val b = Bundle().apply {
+                    putString(CATEGORY_NAME, firstMealDetail.strCategory)
+                    putString(MEAL_AREA, firstMealDetail.strArea)
+                    putString(MEAL_NAME, firstMealDetail.strMeal)
+                    putString(MEAL_THUMB, firstMealDetail.strMealThumb)
+                    putString(MEAL_ID, firstMealDetail.idMeal)
+                }
                 bottomDialog.arguments = b
-                bottomDialog.show(childFragmentManager,"Favorite bottom dialog")
+                bottomDialog.show(childFragmentManager, "Favorite bottom dialog")
             }
-
-        })
+        }
     }
 
     private fun prepareRecyclerView(v:View) {

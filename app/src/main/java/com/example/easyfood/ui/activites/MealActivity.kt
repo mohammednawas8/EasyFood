@@ -6,8 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.easyfood.R
 import com.example.easyfood.adapters.MealRecyclerAdapter
@@ -30,23 +29,23 @@ class MealActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoriesBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        mealActivityMvvm = ViewModelProviders.of(this)[MealActivityMVVM::class.java]
+       // mealActivityMvvm = ViewModelProviders.of(this)[MealActivityMVVM::class.java]
+        mealActivityMvvm = ViewModelProvider(this)[MealActivityMVVM::class.java]
         startLoading()
         prepareRecyclerView()
         mealActivityMvvm.getMealsByCategory(getCategory())
-        mealActivityMvvm.observeMeal().observe(this, object : Observer<List<Meal>> {
-            override fun onChanged(t: List<Meal>?) {
-                if(t==null){
-                    hideLoading()
-                    Toast.makeText(applicationContext, "No meals in this category", Toast.LENGTH_SHORT).show()
-                    onBackPressed()
-                }else {
-                    myAdapter.setCategoryList(t!!)
-                    binding.tvCategoryCount.text = categoryNme + " : " + t.size.toString()
-                    hideLoading()
-                }
+
+        mealActivityMvvm.observeMeal().observe(this) { mealList ->
+            if (mealList == null) {
+                hideLoading()
+                Toast.makeText(applicationContext, "No meals in this category", Toast.LENGTH_SHORT).show()
+                onBackPressed()
+            } else {
+                myAdapter.setCategoryList(mealList)
+                binding.tvCategoryCount.text = categoryNme + " : " + mealList.size.toString()
+                hideLoading()
             }
-        })
+        }
 
         myAdapter.setOnMealClickListener(object : SetOnMealClickListener {
             override fun setOnClickListener(meal: Meal) {
