@@ -32,7 +32,8 @@ class MealActivity : AppCompatActivity() {
         mealActivityMvvm = ViewModelProvider(this)[MealActivityMVVM::class.java]
         startLoading()
         prepareRecyclerView()
-        mealActivityMvvm.getMealsByCategory(getCategory())
+        setCategoryName()
+        mealActivityMvvm.getMealsByCategory(categoryNme)
 
         mealActivityMvvm.observeMeal().observe(this) { mealList ->
             if (mealList == null) {
@@ -70,11 +71,8 @@ class MealActivity : AppCompatActivity() {
         }
     }
 
-    private fun getCategory(): String {
-        val tempIntent = intent
-        val x = intent.getStringExtra(CATEGORY_NAME)!!
-        categoryNme = x
-        return x
+    private fun setCategoryName() {
+        categoryNme = intent.getStringExtra(CATEGORY_NAME)!!
     }
 
     private fun prepareRecyclerView() {
