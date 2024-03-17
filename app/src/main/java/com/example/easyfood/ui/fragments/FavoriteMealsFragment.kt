@@ -1,4 +1,4 @@
-package com.example.easyfood.ui
+package com.example.easyfood.ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,20 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easyfood.R
 import com.example.easyfood.adapters.FavoriteMealsRecyclerAdapter
-import com.example.easyfood.data.pojo.Meal
 import com.example.easyfood.data.pojo.MealDB
 import com.example.easyfood.data.pojo.MealDetail
 import com.example.easyfood.databinding.FragmentFavoriteMealsBinding
 import com.example.easyfood.mvvm.DetailsMVVM
-import com.example.easyfood.ui.activites.MealDetailesActivity
-import com.example.easyfood.ui.fragments.HomeFragment
+import com.example.easyfood.ui.MealBottomDialog
+import com.example.easyfood.ui.activites.MealDetailsActivity
 import com.example.easyfood.ui.fragments.HomeFragment.Companion.CATEGORY_NAME
 import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_AREA
 import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_ID
@@ -30,21 +28,21 @@ import com.google.android.material.snackbar.Snackbar
 
 
 class FavoriteMeals : Fragment() {
-    lateinit var recView:RecyclerView
-    lateinit var fBinding:FragmentFavoriteMealsBinding
+    private lateinit var recView:RecyclerView
+    private lateinit var fBinding:FragmentFavoriteMealsBinding
     private lateinit var myAdapter:FavoriteMealsRecyclerAdapter
     private lateinit var detailsMVVM: DetailsMVVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         myAdapter = FavoriteMealsRecyclerAdapter()
-        detailsMVVM = ViewModelProviders.of(this)[DetailsMVVM::class.java]
+        detailsMVVM = ViewModelProvider(this)[DetailsMVVM::class.java]
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         fBinding = FragmentFavoriteMealsBinding.inflate(inflater,container,false)
         return fBinding.root
     }
@@ -95,11 +93,9 @@ class FavoriteMeals : Fragment() {
     }
 
     private fun showDeleteSnackBar(favoriteMeal:MealDB) {
-        Snackbar.make(requireView(),"Meal was deleted",Snackbar.LENGTH_LONG).apply {
-            setAction("undo",View.OnClickListener {
-                detailsMVVM.insertMeal(favoriteMeal)
-            }).show()
-        }
+        Snackbar.make(requireView(), "Meal was deleted", Snackbar.LENGTH_LONG)
+            .setAction("undo") { detailsMVVM.insertMeal(favoriteMeal) }
+            .show()
     }
 
     private fun observeBottomDialog() {
@@ -120,7 +116,7 @@ class FavoriteMeals : Fragment() {
     }
 
     private fun prepareRecyclerView(v:View) {
-        recView =v.findViewById<RecyclerView>(R.id.fav_rec_view)
+        recView = v.findViewById(R.id.fav_rec_view)
         recView.adapter = myAdapter
         recView.layoutManager = GridLayoutManager(context,2,GridLayoutManager.VERTICAL,false)
     }
@@ -128,7 +124,7 @@ class FavoriteMeals : Fragment() {
     private fun onFavoriteMealClick(){
         myAdapter.setOnFavoriteMealClickListener(object : FavoriteMealsRecyclerAdapter.OnFavoriteClickListener{
             override fun onFavoriteClick(meal: MealDB) {
-                val intent = Intent(context, MealDetailesActivity::class.java)
+                val intent = Intent(context, MealDetailsActivity::class.java)
                 intent.putExtra(MEAL_ID,meal.mealId.toString())
                 intent.putExtra(MEAL_STR,meal.mealName)
                 intent.putExtra(MEAL_THUMB,meal.mealThumb)

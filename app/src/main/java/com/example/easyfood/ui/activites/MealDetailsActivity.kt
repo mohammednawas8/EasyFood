@@ -4,24 +4,20 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.example.easyfood.R
 import com.example.easyfood.data.pojo.MealDB
 import com.example.easyfood.data.pojo.MealDetail
 import com.example.easyfood.databinding.ActivityMealDetailesBinding
 import com.example.easyfood.mvvm.DetailsMVVM
-import com.example.easyfood.ui.fragments.HomeFragment
 import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_ID
 import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_STR
 import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_THUMB
 import com.google.android.material.snackbar.Snackbar
 
-class MealDetailesActivity : AppCompatActivity() {
+class MealDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMealDetailesBinding
     private lateinit var detailsMVVM: DetailsMVVM
     private var mealId = ""

@@ -9,9 +9,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.easyfood.R
-import com.example.easyfood.ui.activites.MealDetailesActivity
+import com.example.easyfood.ui.activites.MealDetailsActivity
 
-import com.example.easyfood.ui.fragments.HomeFragment
 import com.example.easyfood.ui.fragments.HomeFragment.Companion.CATEGORY_NAME
 import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_AREA
 import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_ID
@@ -20,7 +19,7 @@ import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_STR
 import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_THUMB
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class MealBottomDialog() : BottomSheetDialogFragment() {
+class MealBottomDialog : BottomSheetDialogFragment() {
     private var mealName = ""
     private var mealId =""
     private var mealImg = ""
@@ -32,10 +31,10 @@ class MealBottomDialog() : BottomSheetDialogFragment() {
         setStyle(STYLE_NORMAL,R.style.AppBottomSheetDialogTheme)
         val b = arguments
         mealName = b!!.getString(MEAL_NAME).toString()
-        mealId =b!!.getString(MEAL_ID).toString()
-        mealImg =b!!.getString(MEAL_THUMB).toString()
-        mealCategory =b!!.getString(CATEGORY_NAME).toString()
-        mealCountry =b!!.getString(MEAL_AREA).toString()
+        mealId =b.getString(MEAL_ID).toString()
+        mealImg =b.getString(MEAL_THUMB).toString()
+        mealCategory =b.getString(CATEGORY_NAME).toString()
+        mealCountry =b.getString(MEAL_AREA).toString()
     }
 
     override fun onCreateView(
@@ -43,8 +42,7 @@ class MealBottomDialog() : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val v = LayoutInflater.from(context).inflate(R.layout.bottom_sheet_dialog, container, false)
-        return v
+        return LayoutInflater.from(context).inflate(R.layout.bottom_sheet_dialog, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,7 +51,7 @@ class MealBottomDialog() : BottomSheetDialogFragment() {
         prepareView(view)
 
         view.setOnClickListener {
-            val intent = Intent(context, MealDetailesActivity::class.java)
+            val intent = Intent(context, MealDetailsActivity::class.java)
             intent.putExtra(MEAL_ID,mealId)
             intent.putExtra(MEAL_STR,mealName)
             intent.putExtra(MEAL_THUMB,mealImg)
@@ -62,7 +60,7 @@ class MealBottomDialog() : BottomSheetDialogFragment() {
 
     }
 
-    fun prepareView(view:View){
+    private fun prepareView(view:View){
         val tvMealName = view.findViewById<TextView>(R.id.tv_meal_name_in_btmsheet)
         val tvMealCategory = view.findViewById<TextView>(R.id.tv_meal_category)
         val tvMealCountry = view.findViewById<TextView>(R.id.tv_meal_country)

@@ -14,7 +14,6 @@ import com.example.easyfood.adapters.SetOnMealClickListener
 import com.example.easyfood.data.pojo.Meal
 import com.example.easyfood.databinding.ActivityCategoriesBinding
 import com.example.easyfood.mvvm.MealActivityMVVM
-import com.example.easyfood.ui.fragments.HomeFragment
 import com.example.easyfood.ui.fragments.HomeFragment.Companion.CATEGORY_NAME
 import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_ID
 import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_STR
@@ -39,7 +38,7 @@ class MealActivity : AppCompatActivity() {
             if (mealList == null) {
                 hideLoading()
                 Toast.makeText(applicationContext, "No meals in this category", Toast.LENGTH_SHORT).show()
-                onBackPressed()
+                onBackPressedDispatcher.onBackPressed()
             } else {
                 myAdapter.setCategoryList(mealList)
                 binding.tvCategoryCount.text = categoryNme + " : " + mealList.size.toString()
@@ -49,7 +48,7 @@ class MealActivity : AppCompatActivity() {
 
         myAdapter.setOnMealClickListener(object : SetOnMealClickListener {
             override fun setOnClickListener(meal: Meal) {
-                val intent = Intent(applicationContext, MealDetailesActivity::class.java)
+                val intent = Intent(applicationContext, MealDetailsActivity::class.java)
                 intent.putExtra(MEAL_ID, meal.idMeal)
                 intent.putExtra(MEAL_STR, meal.strMeal)
                 intent.putExtra(MEAL_THUMB, meal.strMealThumb)

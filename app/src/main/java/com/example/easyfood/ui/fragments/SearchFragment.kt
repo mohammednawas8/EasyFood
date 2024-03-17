@@ -7,15 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.easyfood.adapters.MealRecyclerAdapter
 import com.example.easyfood.data.pojo.MealDetail
 import com.example.easyfood.databinding.FragmentSearchBinding
 import com.example.easyfood.mvvm.SearchMVVM
-import com.example.easyfood.ui.activites.MealDetailesActivity
-import com.example.easyfood.ui.fragments.HomeFragment
+import com.example.easyfood.ui.activites.MealDetailsActivity
 import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_ID
 import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_STR
 import com.example.easyfood.ui.fragments.HomeFragment.Companion.MEAL_THUMB
@@ -26,19 +24,19 @@ class SearchFragment : Fragment() {
     private lateinit var searchMvvm: SearchMVVM
     private var mealId = ""
     private var mealStr = ""
-    private var mealThub = ""
+    private var mealThumb = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         myAdapter = MealRecyclerAdapter()
-        searchMvvm = ViewModelProviders.of(this)[SearchMVVM::class.java]
+        searchMvvm = ViewModelProvider(this)[SearchMVVM::class.java]
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -53,11 +51,11 @@ class SearchFragment : Fragment() {
 
     private fun setOnMealCardClick() {
         binding.searchedMealCard.setOnClickListener {
-            val intent = Intent(context, MealDetailesActivity::class.java)
+            val intent = Intent(context, MealDetailsActivity::class.java)
 
             intent.putExtra(MEAL_ID, mealId)
             intent.putExtra(MEAL_STR, mealStr)
-            intent.putExtra(MEAL_THUMB, mealThub)
+            intent.putExtra(MEAL_THUMB, mealThumb)
 
             startActivity(intent)
 
@@ -80,7 +78,7 @@ class SearchFragment : Fragment() {
                 binding.apply {
                     mealId = mealDetail.idMeal
                     mealStr = mealDetail.strMeal
-                    mealThub = mealDetail.strMealThumb
+                    mealThumb = mealDetail.strMealThumb
 
                     Glide.with(requireContext().applicationContext)
                         .load(mealDetail.strMealThumb)

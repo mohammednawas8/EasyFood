@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteMeals"
-        android:name="com.example.easyfood.ui.FavoriteMeals"
+        android:name="com.example.easyfood.ui.fragments.FavoriteMeals"
         android:label="fragment_favorite_meals"
         tools:layout="@layout/fragment_favorite_meals" />
     <fragment

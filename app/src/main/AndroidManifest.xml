@@ -15,7 +15,7 @@
             android:name=".ui.activites.MealActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activites.MealDetailesActivity"
+            android:name=".ui.activites.MealDetailsActivity"
             android:exported="false" />
         <activity
             android:name=".ui.activites.MainActivity"

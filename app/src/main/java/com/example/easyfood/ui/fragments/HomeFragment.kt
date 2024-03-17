@@ -8,12 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.easyfood.R
 import com.example.easyfood.adapters.CategoriesRecyclerAdapter
@@ -26,7 +23,7 @@ import com.example.easyfood.mvvm.DetailsMVVM
 import com.example.easyfood.mvvm.MainFragMVVM
 import com.example.easyfood.ui.activites.MealActivity
 import com.example.easyfood.ui.MealBottomDialog
-import com.example.easyfood.ui.activites.MealDetailesActivity
+import com.example.easyfood.ui.activites.MealDetailsActivity
 
 
 
@@ -57,7 +54,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        detailMvvm = ViewModelProviders.of(this)[DetailsMVVM::class.java]
+        detailMvvm = ViewModelProvider(this)[DetailsMVVM::class.java]
         binding = FragmentHomeBinding.inflate(layoutInflater)
         myAdapter = CategoriesRecyclerAdapter()
         mostPopularFoodAdapter = MostPopularRecyclerAdapter()
@@ -66,14 +63,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val mainFragMVVM = ViewModelProviders.of(this)[MainFragMVVM::class.java]
+        val mainFragMVVM = ViewModelProvider(this)[MainFragMVVM::class.java]
         showLoadingCase()
 
 
@@ -116,7 +113,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         mostPopularFoodAdapter.setOnClickListener(object : OnItemClick {
             override fun onItemClick(meal: Meal) {
-                val intent = Intent(activity, MealDetailesActivity::class.java)
+                val intent = Intent(activity, MealDetailsActivity::class.java)
                 intent.putExtra(MEAL_ID, meal.idMeal)
                 intent.putExtra(MEAL_STR, meal.strMeal)
                 intent.putExtra(MEAL_THUMB, meal.strMealThumb)
@@ -166,7 +163,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private fun onRndomMealClick() {
         binding.randomMeal.setOnClickListener {
             val temp = meal.meals[0]
-            val intent = Intent(activity, MealDetailesActivity::class.java)
+            val intent = Intent(activity, MealDetailsActivity::class.java)
             intent.putExtra(MEAL_ID, temp.idMeal)
             intent.putExtra(MEAL_STR, temp.strMeal)
             intent.putExtra(MEAL_THUMB, temp.strMealThumb)
@@ -177,13 +174,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun onRandomLongClick() {
 
-        binding.randomMeal.setOnLongClickListener(object : View.OnLongClickListener {
-            override fun onLongClick(p0: View?): Boolean {
-                detailMvvm.getMealByIdBottomSheet(randomMealId)
-                return true
-            }
-
-        })
+        binding.randomMeal.setOnLongClickListener {
+            detailMvvm.getMealByIdBottomSheet(randomMealId)
+            true // Implicit return
+        }
     }
 
     private fun showLoadingCase() {
