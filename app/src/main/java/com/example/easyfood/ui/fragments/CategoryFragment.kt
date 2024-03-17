@@ -6,8 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.easyfood.R
 import com.example.easyfood.adapters.CategoriesRecyclerAdapter
@@ -15,7 +14,6 @@ import com.example.easyfood.data.pojo.Category
 import com.example.easyfood.databinding.FragmentCategoryBinding
 import com.example.easyfood.mvvm.CategoryMVVM
 import com.example.easyfood.ui.activites.MealActivity
-import com.example.easyfood.ui.fragments.HomeFragment
 import com.example.easyfood.ui.fragments.HomeFragment.Companion.CATEGORY_NAME
 
 
@@ -28,13 +26,13 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         myAdapter = CategoriesRecyclerAdapter()
-        categoryMvvm = ViewModelProviders.of(this)[CategoryMVVM::class.java]
+        categoryMvvm = ViewModelProvider(this)[CategoryMVVM::class.java]
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCategoryBinding.inflate(inflater,container,false)
         return binding.root
     }

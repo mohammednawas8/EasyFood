@@ -59,15 +59,8 @@ class DetailsMVVM(application: Application) : AndroidViewModel(application) {
         })
     }
 
-    fun isMealSavedInDatabase(mealId: String): Boolean {
-        var meal: MealDB? = null
-        runBlocking(Dispatchers.IO) {
-            meal = repository.getMealById(mealId)
-        }
-        if (meal == null)
-            return false
-        return true
-
+    fun isMealSavedInDatabase(mealId: String): Boolean = runBlocking(Dispatchers.IO) {
+        repository.getMealById(mealId) != null
     }
 
     fun deleteMealById(mealId:String){
